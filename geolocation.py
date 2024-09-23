@@ -15,12 +15,14 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # Initialize Redis client
-redis_client = redis.StrictRedis(
-    host=os.getenv('REDIS_HOST', 'localhost'),
-    port=int(os.getenv('REDIS_PORT', 6379)),
-    db=int(os.getenv('REDIS_DB', 0)),
-    password=os.getenv('REDIS_PASSWORD', None)
-)
+redis_client = None
+if os.getenv('REDIS_HOST') and os.getenv('REDIS_PORT') and os.getenv('REDIS_DB'):
+    redis_client = redis.StrictRedis(
+        host=os.getenv('REDIS_HOST', 'localhost'),
+        port=int(os.getenv('REDIS_PORT', 6379)),
+        db=int(os.getenv('REDIS_DB', 0)),
+        password=os.getenv('REDIS_PASSWORD', None)
+    )
 
 class GeoLocation:
     def __init__(self, proxy: Optional[str] = None):
@@ -399,10 +401,11 @@ class GeoLocation:
     
     def get_ip_data(self, ip: str) -> Dict[str, Any]:
         cache_key = f"ipdata:{ip}"
-        cached_data = redis_client.get(cache_key)
-        if cached_data:
-            logger.debug(f"Found cached IP data for {ip}")
-            return json.loads(cached_data)
+        if redis_client:
+            cached_data = redis_client.get(cache_key)
+            if cached_data:
+                logger.debug(f"Found cached IP data for {ip}")
+                return json.loads(cached_data)
 
         url = f"http://ip-api.com/json/{ip}?fields=17035263"
         proxies = None
@@ -416,8 +419,9 @@ class GeoLocation:
         response.raise_for_status()
         data = response.json()
 
-        # Cache the result for 30 days
-        redis_client.setex(cache_key, 60 * 60 * 24 * 30, json.dumps(data))
+        # Cache the result for 30 days if Redis is available
+        if redis_client:
+            redis_client.setex(cache_key, 60 * 60 * 24 * 30, json.dumps(data))
         return data
 
     def get_geolocation(self) -> Dict[str, Any]:
