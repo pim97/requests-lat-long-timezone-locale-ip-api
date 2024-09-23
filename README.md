@@ -1,7 +1,3 @@
-Here’s a polished and easy-to-read version of your README:
-
----
-
 # 🌍 GeoLocation API
 
 A simple API to retrieve timezone, locale, and geolocation data from an IP address. Perfect for enriching your application with accurate location-based accept-language and timezone details.
@@ -33,6 +29,16 @@ geolocation_data = geo.get_geolocation()
 
 # Print the geolocation data
 print(geolocation_data)
+
+# Returns the following dictionary:
+{
+    "lat": 48.8566,
+    "lon": 2.3522,
+    "timezone": "Europe/Paris",
+    "locale": "fr-FR",
+    "ip": "82.117.11.11"
+}
+
 ```
 
 ---
