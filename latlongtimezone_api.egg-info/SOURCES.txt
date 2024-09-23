@@ -1,10 +1,13 @@
 LICENSE
+MANIFEST.in
 README.md
 pyproject.toml
 setup.cfg
 setup.py
 geolocation/__init__.py
 geolocation/geolocation.py
+geolocation/__pycache__/__init__.cpython-311.pyc
+geolocation/__pycache__/geolocation.cpython-311.pyc
 latlongtimezone_api.egg-info/PKG-INFO
 latlongtimezone_api.egg-info/SOURCES.txt
 latlongtimezone_api.egg-info/dependency_links.txt
