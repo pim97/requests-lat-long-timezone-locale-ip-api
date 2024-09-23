@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: requests-lat-long-timezone-locale-ip-api
-Version: 0.1.1
+Version: 0.1.3
 Summary: Get timezone, locale, and location from IP address to use in your requests
 Home-page: https://github.com/pim97/requests-lat-long-timezone-locale-ip-api.git
 Author: dormic97
@@ -11,13 +11,10 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
+License-File: LICENSE
 Requires-Dist: requests
 Requires-Dist: redis
 Requires-Dist: python-dotenv
-
-Here’s a polished and easy-to-read version of your README:
-
----
 
 # 🌍 GeoLocation API
 
@@ -50,6 +47,16 @@ geolocation_data = geo.get_geolocation()
 
 # Print the geolocation data
 print(geolocation_data)
+
+# Returns the following dictionary:
+{
+    "lat": 48.8566,
+    "lon": 2.3522,
+    "timezone": "Europe/Paris",
+    "locale": "fr-FR",
+    "ip": "82.117.11.11"
+}
+
 ```
 
 ---

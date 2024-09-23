@@ -1,7 +1,10 @@
+LICENSE
 README.md
 pyproject.toml
 setup.cfg
 setup.py
+geolocation/__init__.py
+geolocation/geolocation.py
 requests_lat_long_timezone_locale_ip_api.egg-info/PKG-INFO
 requests_lat_long_timezone_locale_ip_api.egg-info/SOURCES.txt
 requests_lat_long_timezone_locale_ip_api.egg-info/dependency_links.txt
